@@ -34,8 +34,6 @@
     </waterfall>
     <Loading class="Loading" :show="loading" />
     <div class="loading" @click="loadmore" disabled="true" v-show="isLoading1">
-      <!-- <span class="loading1" v-show="isLoading1">点我加载更多</span>
-      <span class="loading2" v-show="isLoading2">到底啦~😊</span> -->
       {{ photoList.length >= total ? "到底啦~😊" : "加载更多" }}
     </div>
   </div>
