@@ -33,9 +33,10 @@
       </template>
     </waterfall>
     <Loading class="Loading" :show="loading" />
-    <div class="loading" @click="loadmore" disabled="true">
-      <span class="loading1" v-show="isLoading1">点我加载更多</span>
-      <span class="loading2" v-show="isLoading2">到底啦~😊</span>
+    <div class="loading" @click="loadmore" disabled="true" v-show="isLoading1">
+      <!-- <span class="loading1" v-show="isLoading1">点我加载更多</span>
+      <span class="loading2" v-show="isLoading2">到底啦~😊</span> -->
+      {{ photoList.length >= total ? "到底啦~😊" : "加载更多" }}
     </div>
   </div>
 </template>
@@ -53,7 +54,7 @@ export default {
     return {
       loading: true,
       isLoading1: false,
-      isLoading2: false,
+      total: 0,
       n: 1,
       style: "style3",
       photoList: [],
@@ -95,10 +96,10 @@ export default {
           this.loading = false;
           console.log(res.data);
           this.photoList = this.photoList.concat(res.data.data);
-          if (this.photoList.length === res.data.total) {
-            this.isLoading1 = false;
-            this.isLoading2 = true;
-          }
+          this.total = res.data.total;
+          setTimeout(() => {
+            this.isLoading1 = true;
+          }, 1000);
         }
       });
     },
@@ -112,9 +113,6 @@ export default {
   created() {
     this.n = 1;
     this.http(1);
-    setTimeout(() => {
-      this.isLoading1 = true;
-    }, 1500);
   },
 };
 </script>
