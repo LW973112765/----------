@@ -64,9 +64,29 @@ export default {
       ],
     };
   },
+  methods: {
+    http(page) {
+      this.$api
+        .getMusicAll({
+          page,
+        })
+        .then((res) => {
+          this.currentPage = page;
+          if (res.data.status === 200) {
+            // res.data.data.forEach((data) => {
+            //   data.lrc = data.lrc.replace(/\n/g, "");
+            // });
+            console.log("音乐", res.data.data[0].lrc);
+            this.music = res.data.data;
+          }
+        });
+    },
+  },
+  created() {
+    this.http(1);
+  },
 };
 </script>
-
 <style lang="less" scoped>
 * {
   margin: 0;
@@ -86,7 +106,10 @@ export default {
 .aplayer {
   width: 100%;
   height: auto;
+  max-height: 400px;
+  overflow: auto;
   margin-left: -0px;
+  z-index: 1000;
 }
 
 @keyframes zxl {

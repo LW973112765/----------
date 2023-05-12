@@ -116,6 +116,9 @@ export default {
                   token: res.data.data,
                   avatar: res.data.avatar,
                   email: res.data.email,
+                  age: res.data.age,
+                  sex: res.data.sex,
+                  id: res.data.id,
                 };
                 console.log("obj", obj);
                 this.setUser(obj);

@@ -23,7 +23,7 @@
           align="center"
           #default="scope"
         >
-          <img :src="scope.row.avatar" alt="520" width="100px" height="100px" />
+          <img :src="scope.row.avatar" alt="520" width="100px" height="100px" v-viewer/>
         </el-table-column>
         <el-table-column
           prop="username"
@@ -114,7 +114,16 @@ export default {
   mounted() {
     this.baseUrl = base.host;
   },
-
+  watch: {
+    $route(to, from) {
+      // 监听路由是否变化
+      console.log("to", to);
+      console.log("from", from);
+      if (to.name !== from.name) {
+        this.http(1);
+      }
+    },
+  },
   methods: {
     onInput() {
       this.$forceUpdate();
@@ -192,7 +201,7 @@ export default {
     // 分页
     changePage(num) {
       //用户分页
-      this, (this.currentPage = num);
+      this.currentPage = num
       if (this.type == 1) {
         this.http(num);
       }

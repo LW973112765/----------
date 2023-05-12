@@ -86,9 +86,10 @@ export default {
       // console.log("to", to);
       // console.log("from", from);
       if (to.query.id !== from.query.id) {
-        this.articleidid = to.query.id;
+        this.articleid = to.query.id;
         this.getArtileInfo(to.query.id);
-        this.getComment(this.articleidid);
+        this.getComment(this.articleid);
+        this.getCommentTotal(to.query.id);
       }
     },
   },

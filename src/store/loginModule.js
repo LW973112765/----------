@@ -11,7 +11,10 @@ export default {
                 username: '',
                 token: '',
                 avatar: '',
-                email: ''
+                email: '',
+                age: '',
+                sex: '',
+                id: ''
             }
         },
 
@@ -21,7 +24,10 @@ export default {
             username: '',
             token: '',
             avatar: '',
-            email: ''
+            email: '',
+            age: '',
+            sex: '',
+            id: ''
         },
 
     },

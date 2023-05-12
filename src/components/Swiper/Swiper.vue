@@ -1,16 +1,16 @@
 <template>
   <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item>
-      <img src="./img/1.jpg" alt="" />
+      <img src="./img/1.jpg" alt=""  v-viewer/>
     </el-carousel-item>
     <el-carousel-item>
-      <img src="./img/2.jpg" alt="" />
+      <img src="./img/2.jpg" alt=""  v-viewer/>
     </el-carousel-item>
     <el-carousel-item>
-      <img src="./img/3.jpg" alt="" />
+      <img src="./img/3.jpg" alt=""  v-viewer/>
     </el-carousel-item>
     <el-carousel-item>
-      <img src="./img/4.jpg" alt="" />
+      <img src="./img/4.jpg" alt="" v-viewer/>
     </el-carousel-item>
   </el-carousel>
 </template>

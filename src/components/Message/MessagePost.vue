@@ -111,6 +111,7 @@ export default {
             message: "留言成功😊",
             type: "success",
           });
+          this.$router.go(0)
         }
       });
     },

@@ -118,6 +118,8 @@ export default {
                   token: res.data.data,
                   avatar: res.data.avatar,
                   email: res.data.email,
+                  id: res.data.id,
+                  type: res.data.type,
                 };
                 console.log("obj", obj);
                 this.setAdmin(obj);

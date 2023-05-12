@@ -29,7 +29,21 @@
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="3">
+      <el-submenu index="3" v-if="admininfo.type == 1">
+        <template slot="title">
+          <i class="iconfont icon-guanliyuan"></i>
+          <span> 管理员管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/admin/adminlist">
+            <router-link to="/admin/adminlist">管理员信息 </router-link>
+          </el-menu-item>
+          <el-menu-item index="admin/addadmin">
+            <router-link to="/admin/addadmin">添加管理员</router-link>
+          </el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-submenu index="4">
         <template slot="title">
           <i class="iconfont icon-tupian"></i>
           <span> 相册管理</span>
@@ -43,7 +57,7 @@
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="4">
+      <el-submenu index="5">
         <template slot="title">
           <i class="iconfont icon-shipin"></i>
           <span> 视频管理</span>
@@ -57,11 +71,44 @@
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
+      <el-submenu index="6">
+        <template slot="title">
+          <i class="iconfont icon-yinle"></i>
+          <span> 音乐管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/admin/musiclist">
+            <router-link to="/admin/musiclist">音乐信息</router-link>
+          </el-menu-item>
+          <el-menu-item index="/admin/addmusic">
+            <router-link to="/admin/addmusic">添加音乐</router-link>
+          </el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
       <el-menu-item index="/admin/articlelist">
         <i class="iconfont icon-16"></i>
         <span slot="title">
           <router-link to="/admin/articlelist"> 文章管理</router-link>
         </span>
+      </el-menu-item>
+      <el-menu-item index="/admin/recordlist" v-if="0">
+        <i class="iconfont icon-wenjuanzhongxin"></i>
+        <span slot="title">
+          <router-link to="/admin/recordlist"> 病历管理</router-link>
+        </span>
+      </el-menu-item>
+      <el-menu-item index="/admin/questionmanage">
+        <i class="iconfont icon-wenjuanguanli1"></i>
+        <span slot="title">
+          <router-link to="/admin/questionmanage"> 问卷管理</router-link>
+        </span>
+      </el-menu-item>
+      <el-menu-item index="/admin/chatlist">
+        <i class="iconfont icon-xiaoxi2"></i>
+        <span slot="title">
+          <router-link to="/admin/chatlist"> 消息中心</router-link>
+        </span>
+        <span v-if="total" class="tag">{{ total <= 99 ? total : "99+" }}</span>
       </el-menu-item>
       <el-menu-item index="/admin/category">
         <i class="iconfont icon-fenlei"></i>
@@ -69,8 +116,14 @@
           <router-link to="/admin/category"> 类别管理</router-link>
         </span>
       </el-menu-item>
+      <el-menu-item index="/admin/comments">
+        <i class="iconfont icon-shequpinglun"></i>
+        <span slot="title">
+          <router-link to="/admin/comments"> 评论管理</router-link>
+        </span>
+      </el-menu-item>
       <el-menu-item index="/admin/message">
-        <i class="iconfont icon-liuyanban"></i>
+        <i class="iconfont icon-liuyan"></i>
         <span slot="title">
           <router-link to="/admin/message"> 留言管理</router-link>
         </span>
@@ -92,10 +145,34 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "Mymenu",
   props: ["admin"],
+  data() {
+    return {
+      total: "",
+    };
+  },
+  computed: {
+    ...mapState("AdminLogin", ["admininfo"]),
+  },
+  mounted() {
+    setInterval(() => {
+      this.gettotal();
+    }, 5000);
+  },
+  created() {
+    this.gettotal();
+  },
   methods: {
+    gettotal() {
+      this.$api.GetChatNoTotal({ senderid: this.admininfo.id }).then((res) => {
+        if (res.data.status == 200)
+          console.log("total", res.data.data[0].total);
+        this.total = res.data.data[0].total;
+      });
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -113,6 +190,38 @@ export default {
 <style lang="less" scoped>
 span {
   width: 100%;
+}
+/deep/ .el-submenu .el-menu-item {
+  height: 50px;
+  line-height: 50px;
+  padding: 0 45px;
+  min-width: 56px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 20px;
+  background-color: gray;
+}
+::-webkit-scrollbar-track {
+  background: #ecec54;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f0bbc3, #10a44a);
+  border-radius: 10px;
+}
+.tag {
+  position: absolute;
+  top: 15px;
+  left: 0px;
+  width: auto;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(to right, red, blue);
+  color: white;
+  text-align: center;
+  line-height: 20px;
 }
 .menu {
   position: fixed;

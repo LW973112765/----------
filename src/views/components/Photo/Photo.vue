@@ -25,7 +25,7 @@
     >
       <template>
         <div class="cell-item" v-for="(item, id) in photoList" :key="id">
-          <img v-if="item.url" :lazy-src="item.url" alt="加载错误" />
+          <img v-if="item.url" :src="item.url"  alt="加载错误" v-viewer />
           <div class="item-body">
             <div class="item-desc">{{ item.title }}</div>
           </div>

@@ -89,7 +89,11 @@ export default {
             replaceReg,
             replaceString
           );
-          searchData1[index].content = item.content.replace(
+          searchData1[index].introduction = item.introduction.replace(
+            replaceReg,
+            replaceString
+          );
+          searchData1[index].author = item.author.replace(
             replaceReg,
             replaceString
           );
@@ -104,7 +108,6 @@ export default {
     changePage(num) {
       this.search(num, this.$route.query.content);
     },
-    // 获取文章列表
     search(page, content) {
       this.$api.getSearch({ search: content, page: page }).then((res) => {
         console.log(res.data);

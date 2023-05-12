@@ -10,6 +10,7 @@
         <el-input
           placeholder="请输入内容"
           v-model="val"
+          @input="goSearchArticle(val.trim())"
           @keydown.native.enter="goSearch(val.trim())"
         >
           <i slot="prefix" class="el-input__icon el-icon-search"></i>
@@ -33,7 +34,9 @@
       <!-- <div class="light"><Light @changeBackground="changeBG"></Light></div> -->
     </div>
     <!-- 内容区域 -->
-    <div class="light"><Light @changeBackground="changeBG"></Light></div>
+    <div class="light">
+      <Light @changeBackground="changeBG" :selection="selection"></Light>
+    </div>
     <div class="layout">
       <Leftmenu class="leftmenu"></Leftmenu>
       <Rightmenu class="rightmenu"></Rightmenu>
@@ -66,11 +69,12 @@ export default {
   name: "index",
   data() {
     return {
+      selection: "",
       istop: false,
       val: "",
-      bodyImg: "url(" + require("../../assets/img/bg111.jpg") + ")",
-      bodyImg1: "url(" + require("../../assets/img/night.gif") + ")",
+      bodyImg: "",
       isclick: true,
+      timer: null,
     };
   },
   components: {
@@ -82,32 +86,41 @@ export default {
   },
   computed: {
     ...mapState("loginModule", ["userinfo"]),
+    ...mapState("bgColor", ["bginfo"]),
   },
   watch: {
-    isclick(val) {
-      console.log("变化", val);
-      if (val === true) {
+    selection(val) {
+      console.log("langweu", val);
+      if (val === "on") {
+        this.bodyImg = "url(" + require("../../assets/img/night.gif") + ")";
         document.body.style.backgroundImage = this.bodyImg;
         document.body.style.backgroundSize = "100%";
         document.body.style.backgroundAttachment = "fixed";
       } else {
-        document.body.style.backgroundImage = this.bodyImg1;
+        this.bodyImg = "url(" + require("../../assets/img/bg111.jpg") + ")";
+        document.body.style.backgroundImage = this.bodyImg;
         document.body.style.backgroundSize = "100%";
         document.body.style.backgroundAttachment = "fixed";
       }
     },
   },
-  // watch: {
-  //   val(val, oldval) {
-  //     console.log("新", val);
-  //     console.log("旧", oldval);
-  //     if (val !== oldval) {
-  //       this.val = val;
-  //     }
-  //   },
-  // },
   methods: {
     //搜索
+    search(val) {
+      this.$router.push(`/search?content=${val}`);
+    },
+
+    goSearchArticle(val) {
+      if (val == "") {
+        return this.$message.error("错了哦，输入不能为空");
+      }
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.search(val);
+        console.log(this.input);
+      }, 1000);
+    },
+
     goSearch(val) {
       if (val == "") {
         return this.$message.error("错了哦，输入不能为空");
@@ -115,15 +128,25 @@ export default {
       this.$router.push(`/search?content=${val}`);
     },
     changeBG() {
-      this.isclick = !this.isclick;
-      // console.log(this.isclick);
-      // document.body.style.backgroundImage = `${
-      //   this.click ? this.bodyImg : this.bodyImg1
-      // } `;
-      // document.body.style.backgroundSize = "100%";
-      // document.body.style.backgroundAttachment = "fixed";
+      if (this.selection == "off") this.selection = "on";
+      else {
+        this.selection = "off";
+      }
+      this.$nextTick(() => {
+        let obj = {
+          selection: this.selection,
+          bg: this.bodyImg,
+        };
+        console.log("obj", obj);
+        this.clearBg(obj);
+        this.setBg(obj);
+        //存储本地
+        localStorage.setItem("bginfo", JSON.stringify(obj));
+      });
     },
     ...mapMutations("loginModule", ["clearUser"]),
+    ...mapMutations("bgColor", ["clearBg"]),
+    ...mapMutations("bgColor", ["setBg"]),
     //退出登录
     loginout() {
       //清空vuex数据
@@ -166,10 +189,14 @@ export default {
     },
   },
   mounted() {
+    this.bodyImg =
+      this.bginfo.bg || "url(" + require("../../assets/img/bg111.jpg") + ")";
+    this.selection = this.bginfo.selection || "off";
     document.body.style.backgroundImage = this.bodyImg;
     document.body.style.backgroundSize = "100%";
     document.body.style.backgroundAttachment = "fixed";
     window.addEventListener("scroll", this.handleScroll);
+    console.log("背景图", this.bginfo);
   },
   beforeMount() {
     document.body.style.backgroundImage = "";

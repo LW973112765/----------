@@ -1,17 +1,20 @@
  <template>
   <div class="zzz">
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="收藏中心" name="first">
+      <el-tab-pane label="我的病历" name="first">
+        <MyRecord />
+      </el-tab-pane>
+      <el-tab-pane label="收藏中心" name="second">
         <Collection />
       </el-tab-pane>
-      <el-tab-pane label="基本资料" name="second">
+      <el-tab-pane label="基本资料" name="third">
         <Basic />
         ></el-tab-pane
       >
-      <el-tab-pane label="评论管理" name="third">
+      <el-tab-pane label="评论管理" name="fourth">
         <Comment />
       </el-tab-pane>
-      <el-tab-pane label="我的留言" name="fourth">
+      <el-tab-pane label="我的留言" name="fifth">
         <Message />
       </el-tab-pane>
     </el-tabs>
@@ -22,6 +25,7 @@ import Basic from "./Basic";
 import Comment from "./Comment";
 import Message from "./Message";
 import Collection from "./Collection";
+import MyRecord from "./MyRecord";
 
 export default {
   name: "Usercenter",
@@ -30,7 +34,7 @@ export default {
       activeName: "first",
     };
   },
-  components: { Basic, Comment, Message, Collection },
+  components: { Basic, Comment, Message, Collection , MyRecord },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);

@@ -33,7 +33,7 @@
           #default="scope"
           width="150"
         >
-          <img :src="scope.row.cover" alt="520" width="100px" height="100px" />
+          <img :src="scope.row.cover" alt="520" width="100px" height="100px" v-viewer/>
         </el-table-column>
         <el-table-column
           prop="author"

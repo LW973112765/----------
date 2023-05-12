@@ -36,11 +36,13 @@
       <div id="main"></div>
       <div class="admin">
         <div class="admintop">
-          <div class="avatar"><img :src="admininfo.avatar" alt="" /></div>
+          <div class="avatar">
+            <img :src="admininfo.avatar" alt="lwandzxl" v-viewer />
+          </div>
           <ul>
             <li class="zxl">{{ admininfo.adminname }}</li>
             <li class="lw">
-              <span v-if="admininfo.adminname === 'admin'">超级</span>管理员
+              {{ filterSatatus(admininfo.type) }}
             </li>
           </ul>
         </div>
@@ -86,6 +88,13 @@ export default {
     ...mapState("AdminLogin", ["admininfo"]),
   },
   methods: {
+    filterSatatus(type) {
+      if (type == 1) {
+        return "超级管理员";
+      } else if (type == 2) {
+        return "普通管理员";
+      }
+    },
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
       var myChart = this.$echarts.init(document.getElementById("main"));

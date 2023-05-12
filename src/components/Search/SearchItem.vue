@@ -17,10 +17,12 @@
               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
               alt=""
             />
-            <span class="pl10">发布人：{{ item.author }}</span>
+            <span class="pl10"
+              >发布人：<span style="color: #999" v-html="item.author"></span
+            ></span>
             <!-- <span class="pl20">分类：{{}}</span> -->
           </div>
-          <div class="center" v-html="item.content"></div>
+          <div class="center" v-html="item.introduction"></div>
         </div>
       </div>
       <div class="buttom">
@@ -135,6 +137,10 @@ export default {
       .pl10 {
         padding-left: 10px;
         margin-top: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
       .pl20 {
         margin-top: 10px;
@@ -149,12 +155,10 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      // display: -webkit-box;
       text-overflow: ellipsis;
-      // -webkit-line-clamp: 2;
-      // -webkit-box-orient: vertical;
     }
   }
+
   .buttom {
     height: 30px;
     padding-left: 15px;

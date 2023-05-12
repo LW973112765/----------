@@ -12,7 +12,7 @@
         ></el-col>
       </el-row>
       <div class="admin" v-show="admininfo.adminname">
-        欢迎管理员：{{ admininfo.adminname }}
+        {{ filterSatatus(admininfo.type) }}:{{ admininfo.adminname }}
         <span class="zxl" @click="loginout"
           ><i class="el-icon-loading"></i> 退出登录</span
         >
@@ -49,7 +49,7 @@ export default {
     document.body.style.backgroundImage = this.bodyImg;
     document.body.style.backgroundSize = "100%";
     document.body.style.backgroundAttachment = "fixed";
-    console.log("bbbbbb", this.admininfo.adminname);
+    console.log("bbbbbb", this.admininfo);
     if (this.admininfo.adminname === "") {
       this.$confirm("您还未登录后台, 是否登录?", "温馨提示", {
         confirmButtonText: "确定",
@@ -73,6 +73,13 @@ export default {
     }
   },
   methods: {
+    filterSatatus(type) {
+      if (type == 1) {
+        return "超级管理员";
+      } else if (type == 2) {
+        return "普通管理员";
+      } 
+    },
     ...mapMutations("AdminLogin", ["clearAdmin"]),
     ...mapMutations("AdminLoginAddress", ["clearAddress"]),
 

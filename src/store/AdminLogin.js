@@ -11,7 +11,9 @@ export default {
                 adminname: '',
                 token: '',
                 avatar: '',
-                email: ''
+                email: '',
+                id: '',
+                type: ''
             }
         }
     },
@@ -20,7 +22,9 @@ export default {
             adminname: '',
             token: '',
             avatar: '',
-            email: ''
+            email: '',
+            id: '',
+            type: ''
         }
     },
 }

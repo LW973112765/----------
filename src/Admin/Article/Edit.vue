@@ -227,7 +227,7 @@ export default {
       // console.log(file.raw.name, ".........", res.url);
       // const imgurl = file.raw.name;
       this.$message({
-        message: "恭喜你，图片上传成功成功",
+        message: "恭喜你，图片上传成功",
         type: "success",
       });
       this.ruleForm.cover = this.baseurl + "/" + res.url.slice(7);

@@ -7,6 +7,8 @@ import loginModule from './loginModule'
 import AdminLogin from './AdminLogin'
 import AdminLoginAddress from './AdminLoginAddress'
 import bgColor from './bgColor'
+import UserChat from './UserChat'
+import AdminChat from './AdminChat'
 Vue.use(Vuex)
 
 //准备actions——用于响应组件中的动作
@@ -30,6 +32,8 @@ export default new Vuex.Store({
         loginModule,
         bgColor,
         AdminLogin,
-        AdminLoginAddress
+        AdminLoginAddress,
+        UserChat,
+        AdminChat
     }
 })

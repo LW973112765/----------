@@ -30,7 +30,7 @@
           align="center"
           #default="scope"
         >
-          <img :src="scope.row.avatar" alt="520" width="100px" height="100px" />
+          <img :src="scope.row.avatar" alt="520" width="100px" height="100px" v-viewer/>
         </el-table-column>
         <el-table-column prop="email" label="邮箱" align="center">
         </el-table-column>

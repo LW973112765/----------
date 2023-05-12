@@ -218,17 +218,10 @@ export default {
         message: "恭喜你，图片上传成功成功",
         type: "success",
       });
-      // this.ruleForm.pic = base.host + "/" + res.url.slice(7);
-      // this.isShangchuan = false;
-      // this.imageUrl = `http://localhost:8989${this.$route.query.avatar.slice(
-      //   7
-      // )}`;
-      // this.imageUrl = `http://localhost:8989/${imgurl}`;
       this.imageUrl = `${base.host}/${res.url.slice(7)}`;
       console.log("this.imageUrl", this.imageUrl);
       this.ruleForm.avatar = this.baseurl + "/" + res.url.slice(7);
       console.log("图片地址", this.ruleForm.avatar);
-      // console.log("图片地址", this.imageUrl);
     },
 
     beforeAvatarUpload(file) {

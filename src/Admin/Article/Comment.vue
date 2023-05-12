@@ -132,7 +132,8 @@ export default {
   },
   mounted() {
     this.baseUrl = base.host;
-    console.log("收到了", this.$route.params);
+    // console.log("收到了", this.$route.params);
+    console.log("收到了",this.$route.query.id);
   },
   methods: {
     // 1 通过 2 拒绝  3 待审核  '' 全部

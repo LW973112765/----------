@@ -98,6 +98,9 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+/deep/ button[data-v-d1db1a32]:first-child {
+  margin-left: 174px;
+}
 .main {
   padding-top: 50px;
   padding-left: 15px;

@@ -55,6 +55,7 @@
           class="avatar-uploader"
           :action="url"
           :show-file-list="false"
+          :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
           <img
@@ -134,7 +135,7 @@ export default {
   },
   methods: {
     fanhui() {
-      this.$router.push("/admin/home");
+      this.$router.go(-1);
     },
     submitForm() {
       this.$refs.ruleForm.validate((valid) => {

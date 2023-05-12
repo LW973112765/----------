@@ -52,7 +52,7 @@
           #default="scope"
           width="150"
         >
-          <img :src="scope.row.cover" alt="520" width="100px" height="100px" />
+          <img :src="scope.row.cover" alt="520" width="100px" height="100px" v-viewer/>
         </el-table-column>
         <el-table-column
           prop="author"
@@ -176,6 +176,16 @@ export default {
       this.$route.query.currentPage,
       typeof this.$route.query.currentPage
     );
+  },
+  watch: {
+    $route(to, from) {
+      // 监听路由是否变化
+      console.log("to", to);
+      console.log("from", from);
+      if (to.name !== from.name) {
+        this.http(1);
+      }
+    },
   },
   methods: {
     // goComment(item) {

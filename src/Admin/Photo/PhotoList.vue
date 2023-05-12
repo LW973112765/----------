@@ -6,6 +6,7 @@
           style="width: 200px; height: 200px"
           :src="item.url"
           alt="加载错误"
+          v-viewer
         ></el-image>
         <div class="el-icon-delete-solid" @click="deletePhoto(item.id)"></div>
         <span>{{ item.title }}</span>

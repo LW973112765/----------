@@ -1,7 +1,12 @@
 <template>
   <div id="lampadario" @click="changebg">
-    <input type="radio" name="switch" value="on" />
-    <input type="radio" name="switch" value="off" checked="checked" />
+    <input type="radio" name="switch" value="on" :checked="selection == 'on'" />
+    <input
+      type="radio"
+      name="switch"
+      value="off"
+      :checked="selection == 'off'"
+    />
     <label for="switch"></label>
     <div id="filo"></div>
     <!-- <div id="lampadina">
@@ -14,6 +19,7 @@
 <script>
 export default {
   name: "light",
+  props: ["selection"],
   methods: {
     changebg() {
       this.$emit("changeBackground");
