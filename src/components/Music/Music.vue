@@ -78,6 +78,7 @@ export default {
             // });
             console.log("音乐", res.data.data[0].lrc);
             this.music = res.data.data;
+            // 55
           }
         });
     },
